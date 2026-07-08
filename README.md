@@ -3,7 +3,62 @@
 ##  What this project is
 Inspired by <a href="https://www.reddit.com/r/AustralianNostalgia/comments/1fx5e6g/old_school_love_compatibility_tests_random_i_know/">old school romance compaitbility tests (based on names)</a> I built a old-school style, hand-held console like hardware with Arduino 32 as the display to match the player to their soulmate (from the cast of the 2026 FIFA world cup players trending all over social media). With a series of personality questions the user will be matched to their perfect partner from the world cup, and be able to navigate and reset through answer choices with the buttons.
 
-I'm a compelte beginner so the provcess has been a lot of trail and error; I will be able to display the quiz results through the OLED display or connecting to my laptop.
+The Arduino handles the logic, the PCB wires everything together, and the OLED will display the game alongisde the buttons. 
+
+## Project Architecture
+                USB-C
+                   │
+                   ▼
+        ┌─────────────────┐
+        │ Arduino Nano    │
+        │ ESP32           │
+        │                 │
+        │ Runs all code   │
+        └─────────────────┘
+           │  │  │  │
+           │  │  │  │
+           │  │  │  └── D5 → RESET button
+           │  │  └───── D4 → RIGHT button
+           │  └──────── D3 → OK button
+           └─────────── D2 → LEFT button
+
+           │
+           ├── SDA → OLED SDA
+           └── SCL → OLED SCL
+
+           │
+           ├── 5V → OLED VCC
+           └── GND → OLED GND
+
+## Software Flow 
+Power On
+   │
+   ▼
+Title Screen
+   │
+   ▼
+Intro Screen
+   │
+   ▼
+12 Quiz Questions
+   │
+   ▼
+Fake Analysis Screen
+   │
+   ▼
+Compatibility Result
+   │
+   ▼
+Football Profile
+   │
+   ▼
+Ending Screen
+   │
+   ▼
+Reset
+
+## Image examples and Demo
+<a href="https://youtu.be/Up6vLfFCHvI">Video demo here</a>
 <img width="815" height="666" alt="Screenshot 2026-07-03 at 6 18 37 PM" src="https://github.com/user-attachments/assets/c5b3518a-b2ad-4fbe-8191-b721c139d3b8" />
 <img width="591" height="492" alt="Screenshot 2026-07-03 at 6 07 43 PM" src="https://github.com/user-attachments/assets/84cb8794-78a1-46df-aa7d-0e65048c0cc2" />
 <img width="631" height="570" alt="Screenshot 2026-07-07 at 8 47 31 PM" src="https://github.com/user-attachments/assets/12febfa9-b6f3-48df-bde7-1ddcd7108f5e" />
